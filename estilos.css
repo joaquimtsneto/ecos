@@ -239,12 +239,6 @@ header .icone-topo svg {
   height: 24px;
 }
 
-/* Ajustes de largura */
-.botao-hinario {
-  width: 144px;
-  height: 100px;
-}
-
 .botao-mostrar-todos {
   background-color: #4B7BE7;
   color: white;
