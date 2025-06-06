@@ -1,1 +1,2 @@
-// script.js reservado para funcionalidades futuras
+// Placeholder para funcionalidades futuras (modo escuro, admin, etc.)
+console.log('JS carregado corretamente.');
