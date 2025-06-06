@@ -10,17 +10,25 @@
   <header>
     <h1>Ecos de Louvor</h1>
     <div>
-      <button class="botao botao-azul">🌙</button>
-      <button class="botao botao-amarelo">🔠</button>
-      <button class="botao botao-verde">🔒</button>
+      <button class="botao-hinario"><span class="icone">🌙</span><span class="texto"></span></button>
+      <button class="botao-hinario"><span class="icone">🔠</span><span class="texto"></span></button>
+      <button class="botao-hinario"><span class="icone">🔒</span><span class="texto"></span></button>
     </div>
   </header>
 
-  <div style="text-align:center; margin-top: 1rem;">
-    <button class="botao botao-azul">Todos os Hinos</button>
-    <button class="botao botao-verde">Cantor Cristão</button>
-    <button class="botao botao-verde">HCC</button>
-    <button class="botao botao-verde">Cânticos</button>
+  <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+    <button class="botao-hinario">
+      <span class="icone">📘</span>
+      <span class="texto">Cantor Cristão</span>
+    </button>
+    <button class="botao-hinario">
+      <span class="icone">🏛️</span>
+      <span class="texto">HCC</span>
+    </button>
+    <button class="botao-hinario">
+      <span class="icone">🎙️</span>
+      <span class="texto">Cânticos</span>
+    </button>
   </div>
 
   <div class="busca">
@@ -29,16 +37,25 @@
   </div>
 
   <div style="text-align:center;">
-    <button class="botao botao-azul">❤️ Favoritos</button>
-    <button class="botao botao-verde">🎸 Acordes</button>
-    <button class="botao botao-amarelo">💰 Doações</button>
-  </div>
-
-  <div class="card-hino">
-    <div class="favorito">❤️</div>
-    <div style="font-weight:bold;">CC 2<br>Bendito Seja Sempre o Cordeiro</div>
-    <div style="margin-top:0.4rem;">Bendito seja sempre o Cordeiro...</div>
-    <a href="#" class="ver-hino">Ver Hino</a>
-  </div>
+    <button class="botao-funcional"><span>❤️</span>Favoritos</button>
+    <button class="botao-funcional"><span>🎸</span>Acordes</button>
+    <button class="botao-funcional botao-doacoes"><span>💰</span>Doações</button>
+  
+    <button class="botao-categorias"><span>🏷️</span>Categorias</button>
+    
+    <div class="caixa-hino">
+      <div class="topo">
+        <div>
+          <span>CC 2</span>
+          <h3>Bendito Seja Sempre o Cordeiro</h3>
+        </div>
+        <div class="favorito">❤️</div>
+      </div>
+      <p>Bendito seja sempre o Cordeiro, morto por nós na cruz...</p>
+      <a href="#" class="ver-btn">Ver Hino</a>
+    </div>
+    </div>
 </body>
+    
+    
 </html>

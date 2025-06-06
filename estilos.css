@@ -2,13 +2,13 @@
 body {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   background-color: #f5f7fa;
-  color: #111;
   margin: 0;
   padding: 0;
+  color: #111;
 }
 
 header {
-  background-color: #0d47a1;
+  background-color: #325AD1;
   color: white;
   padding: 1.2rem;
   display: flex;
@@ -22,22 +22,51 @@ h1 {
   margin: 0;
 }
 
-button, .botao {
-  border: none;
+.botao-hinario {
+  background-color: #4B7BE7;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 100px;
   border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  border: none;
+  margin: 0.5rem;
+}
+
+.botao-hinario span.icone {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.botao-hinario span.texto {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.botao-funcional {
+  background-color: #0d47a1;
+  color: white;
   padding: 0.6rem 1.2rem;
   margin: 0.4rem;
   font-size: 1rem;
   font-weight: 500;
-  cursor: pointer;
-  color: white;
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: background 0.2s ease;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
-.botao-azul { background-color: #0d47a1; }
-.botao-verde { background-color: #1b5e20; }
-.botao-amarelo { background-color: #f9a825; }
+.botao-doacoes {
+  background-color: #E9A23B;
+}
 
 .busca {
   margin: 1.5rem auto;
@@ -60,33 +89,78 @@ button, .botao {
   color: #111;
 }
 
-.card-hino {
-  background: white;
+.botao-categorias {
+  border: 2px solid #0d47a1;
+  color: #0d47a1;
+  background-color: transparent;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.botao-categorias:hover {
+  background-color: #e3f2fd;
+}
+
+.caixa-hino {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
   margin: 1rem auto;
-  width: 90%;
   max-width: 600px;
-  border-radius: 16px;
-  padding: 1.2rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  position: relative;
+}
+
+.caixa-hino:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.caixa-hino .topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.caixa-hino .topo span {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.caixa-hino h3 {
+  margin: 0.2rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
   color: #000;
 }
 
-.card-hino .favorito {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+.caixa-hino .favorito {
   color: red;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
-.ver-hino {
+.caixa-hino p {
+  font-size: 0.95rem;
+  color: #222;
+  margin-top: 0.5rem;
+}
+
+.caixa-hino .ver-btn {
   display: inline-block;
   margin-top: 1rem;
-  background-color: #0d47a1;
-  color: white;
-  padding: 0.5rem 1rem;
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 0.4rem 0.9rem;
   border-radius: 8px;
   text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 500;
+  float: right;
 }
