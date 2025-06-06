@@ -1,0 +1,249 @@
+/* --- Variáveis Globais e Temas --- */
+:root {
+    --font-family: 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Paleta "Serene Nature" */
+    --light-bg: #F5F5DC; /* Beige */
+    --light-text: #3D2B1F; /* Sepia */
+    --dark-bg: #003366; /* Dark Slate Blue */
+    --dark-text: #FAF0E6; /* Linen */
+    
+    --primary-color: #8FBC8F; /* Dark Sea Green */
+    --primary-text: #FFFFFF;
+    --secondary-color: #ADD8E6; /* Light Blue */
+    
+    --title-color-light: #228B22; /* Forest Green */
+    --title-color-dark: #3CB371; /* Medium Sea Green */
+    
+    --donation-btn-bg: #FF7F50; /* Coral */
+    --donation-btn-text: #FFFFFF;
+    
+    --border-color-light: #cccccc;
+    --border-color-dark: #4a6a8a;
+    
+    --font-size-md: 16px;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: var(--font-size-md);
+}
+
+body.light-theme {
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+body.dark-theme {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+.app-container {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* --- Estrutura e Ecrãs --- */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* --- Cabeçalho --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--primary-text);
+}
+.app-header h1 {
+    font-size: 1.2em;
+    margin: 0;
+}
+.header-controls button {
+    background: none;
+    border: none;
+    color: var(--primary-text);
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+/* --- Pesquisa e Botões --- */
+.search-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(0,0,0,0.05);
+}
+.search-container i {
+    margin-right: 10px;
+    color: #888;
+}
+body.dark-theme .search-container i { color: #ccc; }
+#search-bar {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 1em;
+    outline: none;
+    color: inherit;
+}
+.hymnal-buttons, .quick-access, .admin-only-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    flex-wrap: wrap;
+}
+button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+button:active { transform: scale(0.95); }
+
+.hymnal-btn {
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+}
+.quick-access button, .admin-only-controls button {
+    background-color: var(--primary-color);
+    color: var(--primary-text);
+}
+#donations-btn {
+    background-color: var(--donation-btn-bg);
+    color: var(--donation-btn-text);
+}
+
+
+/* --- Lista de Hinos --- */
+#hymn-list-container { padding: 0 10px 80px 10px; }
+.hymn-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color-light);
+    cursor: pointer;
+}
+body.dark-theme .hymn-item { border-bottom-color: var(--border-color-dark); }
+.hymn-item:hover { background-color: rgba(0,0,0,0.05); }
+
+.hymn-number {
+    font-size: 1.1em;
+    font-weight: bold;
+    min-width: 40px;
+    color: var(--title-color-light);
+}
+body.dark-theme .hymn-number { color: var(--title-color-dark); }
+.hymn-title { font-size: 1em; }
+
+
+/* --- Vista do Hino --- */
+#hymn-view-screen {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-bg);
+    transition: left 0.3s ease-in-out;
+    z-index: 10;
+}
+body.dark-theme #hymn-view-screen { background-color: var(--dark-bg); }
+#hymn-view-screen.active { left: 0; }
+.hymn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--primary-text);
+}
+#hymn-title-header { font-weight: bold; }
+.hymn-header button { background: none; border: none; color: white; font-size: 1.2em; }
+#hymn-content {
+    padding: 20px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+.hymn-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: var(--primary-color);
+    padding: 10px;
+}
+.hymn-nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* --- Modais --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+.modal.active { display: flex; }
+.modal-content {
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+body.dark-theme .modal-content {
+    background-color: var(--dark-bg);
+    border: 1px solid var(--border-color-dark);
+}
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    color: inherit;
+}
+.donation-methods .method {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+}
+body.dark-theme .donation-methods .method { border-color: var(--border-color-dark); }
+.donation-methods .copy-btn { margin-top: 10px; }
+
+#admin-password-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid var(--border-color-light);
+    border-radius: 5px;
+}
+.error-msg { color: #D8000C; font-size: 0.9em; }
