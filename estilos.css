@@ -134,3 +134,92 @@ header .icone-topo {
   width: 240px;
   height: 100px;
 }
+
+/* Reduzir largura dos retângulos principais em 20% */
+.botao-hinario {
+  width: 192px;
+  height: 100px;
+}
+
+/* Tornar ícones brancos nos botões principais */
+.botao-hinario span.icone {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  color: white;
+}
+
+/* Novo botão "Mostrar Todos" */
+.botao-mostrar-todos {
+  background-color: #4B7BE7;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  height: 100px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  border: none;
+  margin: 0.5rem;
+}
+
+/* Botão Categorias - cinza escuro com fonte branca */
+.botao-categorias {
+  border: none;
+  color: white;
+  background-color: #555;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+/* Caixa de letra do hino com borda leve */
+.caixa-hino {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  margin: 1rem auto;
+  max-width: 600px;
+  border: 1px solid #ddd;
+}
+
+.caixa-hino h3 {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.caixa-hino p {
+  font-size: 0.95rem;
+  color: #111;
+  margin-top: 0.5rem;
+}
+
+.caixa-hino .favorito {
+  text-align: center;
+  font-size: 1.4rem;
+  color: red;
+  margin: 0.5rem 0;
+}
+
+.caixa-hino .ver-btn {
+  display: inline-block;
+  margin-top: 0.8rem;
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
