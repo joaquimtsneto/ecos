@@ -261,3 +261,24 @@ header .icone-topo svg {
   text-align: center;
   font-weight: 500;
 }
+
+.botao-principal {
+  width: 160px;
+  height: 100px;
+  background-color: #4B7BE7;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 14px;
+  margin: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  border: none;
+}
+
+.botao-principal i {
+  font-size: 24px;
+  margin-bottom: 0.3rem;
+}
