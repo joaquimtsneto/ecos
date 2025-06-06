@@ -5,47 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecos de Louvor</title>
   <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 1rem; background: #f9fafb; }
-    header { background: #2563eb; color: white; padding: 1rem; text-align: center; font-size: 1.4rem; }
-    input { padding: 0.6rem; width: 100%; max-width: 400px; margin: 1rem auto; display: block; border-radius: 8px; border: 1px solid #ccc; }
-    .hymn-card {
-      background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      width: 300px; padding: 1rem; margin: 1rem auto;
+    body { margin:0; font-family: sans-serif; background:#f9fafb; color:#1f2937; }
+    header {
+      background: #2563eb; color: white;
+      padding: 1rem; display: flex; justify-content: space-between; align-items: center;
     }
-    .hymn-card h3 { margin: 0.5rem 0; }
+    header h1 { margin: 0; font-size: 1.3rem; }
+    .icon-group i { margin-left: 1rem; cursor: pointer; }
+
+    .search-bar {
+      display: flex; justify-content: center; margin: 1rem;
+    }
+    .search-bar input {
+      width: 90%; max-width: 600px; padding: 0.8rem;
+      border-radius: 8px; border: 1px solid #ccc;
+    }
+
+    .hymn-list {
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+      padding: 1rem;
+    }
+    .hymn-card {
+      background: white; border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 300px; padding: 1rem;
+      position: relative;
+    }
+    .hymn-card h3 { margin: 0.2rem 0; }
     .hymn-card p { margin: 0.5rem 0; color: #374151; }
     .hymn-card small { color: #6b7280; }
-    .controls { text-align: center; margin-top: 1rem; }
-    .fav-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #ef4444; }
-    .chords { display: none; background: #f0f0f0; padding: 0.5rem; border-radius: 6px; margin-top: 0.5rem; }
+    .hymn-card button {
+      background: #f0f0f0; border: none;
+      padding: 0.4rem 0.8rem; border-radius: 5px;
+      cursor: pointer;
+    }
+    .fav-btn {
+      position: absolute; top: 10px; right: 10px;
+      background: none; border: none; font-size: 1.2rem;
+      color: #ef4444; cursor: pointer;
+    }
+    .chords {
+      display: none; background: #f3f4f6; padding: 0.5rem;
+      border-radius: 6px; margin-top: 0.5rem; white-space: pre-wrap;
+    }
+    .admin-btn {
+      position: fixed; top: 10px; right: 10px;
+      background: white; color: #2563eb;
+      border: 2px solid #2563eb;
+      padding: 0.5rem; border-radius: 10px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <header>Ecos de Louvor</header>
-  <input type="text" id="searchInput" placeholder="Buscar por título, número ou categoria..." oninput="filtrarHinos()" />
+  <header>
+    <h1>Ecos de Louvor</h1>
+    <div class="icon-group">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-text-height"></i>
+      <i class="fas fa-lock" onclick="document.getElementById('adminLogin').style.display='flex'"></i>
+    </div>
+  </header>
 
-  <div id="listaHinos"></div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Buscar por título, número ou categoria..." oninput="filtrarHinos()" />
+  </div>
+
+  <div id="listaHinos" class="hymn-list"></div>
+
+  <div id="adminLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#00000080; align-items:center; justify-content:center;">
+    <div style="background:white; padding:2rem; border-radius:10px; max-width:400px; margin:auto;">
+      <h3>🔐 Acesso Administrativo</h3>
+      <input type="password" id="senhaAdmin" placeholder="Digite a senha..." style="padding:0.5rem; width:100%; margin:1rem 0;" />
+      <div style="text-align:right;">
+        <button onclick="verificarSenha()">Entrar</button>
+        <button onclick="document.getElementById('adminLogin').style.display='none'">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="painelAdmin" style="display:none; padding:1rem;">
+    <h2>Painel do Administrador</h2>
+    <button onclick="exibirFormularioNovoHino()">+ Adicionar Novo Hino</button>
+    <div id="formNovoHino" style="display:none; margin-top:1rem;">
+      <input id="novoHinario" placeholder="Hinário" /><br/>
+      <input id="novoTitulo" placeholder="Título" /><br/>
+      <textarea id="novaLetra" placeholder="Letra" rows="3"></textarea><br/>
+      <textarea id="novosAcordes" placeholder="Acordes" rows="2"></textarea><br/>
+      <button onclick="salvarNovoHino()">Salvar</button>
+    </div>
+  </div>
 
   <script>
-    const hinos = [
-      {
-        id: 'hcc-120',
-        hinario: 'HCC 120',
-        titulo: 'Maravilhosa Graça',
-        letra: 'Maravilhosa graça! Maior que o meu pecar...',
-        acordes: 'C   G   Am   F\nMaravilhosa graça...',
-      },
-      {
-        id: 'canticos-1',
-        hinario: 'Cânticos 1',
-        titulo: 'Ao Único',
-        letra: 'Ao único que é digno de receber...',
-        acordes: 'Em   C   G   D\nAo único que é digno...',
-      }
-    ];
-
+    let adminAtivo = false;
     const favoritos = JSON.parse(localStorage.getItem('favoritos') || '[]');
+
+    const hinos = [
+      { id: 'hcc-120', hinario: 'HCC 120', titulo: 'Maravilhosa Graça', letra: 'Maravilhosa graça! Maior que o meu pecar...', acordes: 'C G Am F\nMaravilhosa graça...' },
+      { id: 'canticos-1', hinario: 'Cânticos 1', titulo: 'Ao Único', letra: 'Ao único que é digno de receber...', acordes: 'Em C G D\nAo único que é digno...' }
+    ];
 
     function renderizarHinos() {
       const container = document.getElementById('listaHinos');
@@ -55,10 +115,8 @@
         const card = document.createElement('div');
         card.className = 'hymn-card';
         card.innerHTML = `
-          <div style="display:flex; justify-content:space-between;">
-            <small>${hino.hinario}</small>
-            <button class="fav-btn" onclick="toggleFavorito('${hino.id}')">${isFav ? '♥' : '♡'}</button>
-          </div>
+          <button class="fav-btn" onclick="toggleFavorito('${hino.id}')">${isFav ? '♥' : '♡'}</button>
+          <small>${hino.hinario}</small>
           <h3>${hino.titulo}</h3>
           <p>${hino.letra}</p>
           <button onclick="toggleAcordes('${hino.id}')">🎸 Mostrar Acordes</button>
@@ -89,41 +147,6 @@
       });
     }
 
-    renderizarHinos();
-  </script>
-
-  <div id="adminLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#00000080; align-items:center; justify-content:center;">
-    <div style="background:white; padding:2rem; border-radius:10px; max-width:400px; margin:auto;">
-      <h3>🔐 Acesso Administrativo</h3>
-      <input type="password" id="senhaAdmin" placeholder="Digite a senha..." style="padding:0.5rem; width:100%; margin:1rem 0;" />
-      <div style="text-align:right;">
-        <button onclick="verificarSenha()">Entrar</button>
-        <button onclick="document.getElementById('adminLogin').style.display='none'">Cancelar</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="painelAdmin" style="display:none; padding:1rem;">
-    <h2>Painel do Administrador</h2>
-    <p>Total de hinos: <span id="totalHinos">2</span></p>
-    <p>Total com acordes: <span id="totalComAcordes">2</span></p>
-    <button onclick="exibirFormularioNovoHino()">+ Adicionar Novo Hino</button>
-    <div id="formNovoHino" style="display:none; margin-top:1rem;">
-      <input id="novoHinario" placeholder="Hinário" /><br/>
-      <input id="novoTitulo" placeholder="Título" /><br/>
-      <textarea id="novaLetra" placeholder="Letra" rows="3"></textarea><br/>
-      <textarea id="novosAcordes" placeholder="Acordes" rows="2"></textarea><br/>
-      <button onclick="salvarNovoHino()">Salvar</button>
-    </div>
-  </div>
-
-  <script>
-    let adminAtivo = false;
-
-    document.querySelector('.fa-lock').onclick = () => {
-      document.getElementById('adminLogin').style.display = 'flex';
-    };
-
     function verificarSenha() {
       const senha = document.getElementById('senhaAdmin').value;
       if (senha === '1234') {
@@ -151,8 +174,8 @@
       renderizarHinos();
       alert('Hino adicionado com sucesso.');
     }
+
+    renderizarHinos();
   </script>
 </body>
-</html>
-
 </html>
