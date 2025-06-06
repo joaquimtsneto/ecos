@@ -131,7 +131,39 @@
       if (idx >= 0) favoritos.splice(idx, 1);
       else favoritos.push(id);
       localStorage.setItem('favoritos', JSON.stringify(favoritos));
+      
+    document.querySelector('.fa-lock').onclick = () => {
+      document.getElementById('adminLogin').style.display = 'flex';
+    };
+
+    function verificarSenha() {
+      const senha = document.getElementById('senhaAdmin').value;
+      if (senha === '1234') {
+        adminAtivo = true;
+        document.getElementById('adminLogin').style.display = 'none';
+        document.getElementById('painelAdmin').style.display = 'block';
+        alert('Acesso concedido!');
+      } else {
+        alert('Senha incorreta.');
+      }
+    }
+
+    function exibirFormularioNovoHino() {
+      document.getElementById('formNovoHino').style.display = 'block';
+    }
+
+    function salvarNovoHino() {
+      const id = 'novo-' + Date.now();
+      const hinario = document.getElementById('novoHinario').value || 'Manual';
+      const titulo = document.getElementById('novoTitulo').value || 'Sem título';
+      const letra = document.getElementById('novaLetra').value || '';
+      const acordes = document.getElementById('novosAcordes').value || '';
+      hinos.push({ id, hinario, titulo, letra, acordes });
       renderizarHinos();
+      alert('Hino adicionado com sucesso.');
+    }
+
+renderizarHinos();
     }
 
     function toggleAcordes(id) {
@@ -171,11 +203,99 @@
       const acordes = document.getElementById('novosAcordes').value || '';
 
       hinos.push({ id, hinario, titulo, letra, acordes });
+      
+    document.querySelector('.fa-lock').onclick = () => {
+      document.getElementById('adminLogin').style.display = 'flex';
+    };
+
+    function verificarSenha() {
+      const senha = document.getElementById('senhaAdmin').value;
+      if (senha === '1234') {
+        adminAtivo = true;
+        document.getElementById('adminLogin').style.display = 'none';
+        document.getElementById('painelAdmin').style.display = 'block';
+        alert('Acesso concedido!');
+      } else {
+        alert('Senha incorreta.');
+      }
+    }
+
+    function exibirFormularioNovoHino() {
+      document.getElementById('formNovoHino').style.display = 'block';
+    }
+
+    function salvarNovoHino() {
+      const id = 'novo-' + Date.now();
+      const hinario = document.getElementById('novoHinario').value || 'Manual';
+      const titulo = document.getElementById('novoTitulo').value || 'Sem título';
+      const letra = document.getElementById('novaLetra').value || '';
+      const acordes = document.getElementById('novosAcordes').value || '';
+      hinos.push({ id, hinario, titulo, letra, acordes });
       renderizarHinos();
       alert('Hino adicionado com sucesso.');
     }
 
-    renderizarHinos();
+renderizarHinos();
+      alert('Hino adicionado com sucesso.');
+    }
+
+    
+    document.querySelector('.fa-lock').onclick = () => {
+      document.getElementById('adminLogin').style.display = 'flex';
+    };
+
+    function verificarSenha() {
+      const senha = document.getElementById('senhaAdmin').value;
+      if (senha === '1234') {
+        adminAtivo = true;
+        document.getElementById('adminLogin').style.display = 'none';
+        document.getElementById('painelAdmin').style.display = 'block';
+        alert('Acesso concedido!');
+      } else {
+        alert('Senha incorreta.');
+      }
+    }
+
+    function exibirFormularioNovoHino() {
+      document.getElementById('formNovoHino').style.display = 'block';
+    }
+
+    function salvarNovoHino() {
+      const id = 'novo-' + Date.now();
+      const hinario = document.getElementById('novoHinario').value || 'Manual';
+      const titulo = document.getElementById('novoTitulo').value || 'Sem título';
+      const letra = document.getElementById('novaLetra').value || '';
+      const acordes = document.getElementById('novosAcordes').value || '';
+      hinos.push({ id, hinario, titulo, letra, acordes });
+      renderizarHinos();
+      alert('Hino adicionado com sucesso.');
+    }
+
+renderizarHinos();
   </script>
+
+  <div id="adminLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#00000080; align-items:center; justify-content:center;">
+    <div style="background:white; padding:2rem; border-radius:10px; max-width:400px; margin:auto;">
+      <h3>🔐 Acesso Administrativo</h3>
+      <input type="password" id="senhaAdmin" placeholder="Digite a senha..." style="padding:0.5rem; width:100%; margin:1rem 0;" />
+      <div style="text-align:right;">
+        <button onclick="verificarSenha()">Entrar</button>
+        <button onclick="document.getElementById('adminLogin').style.display='none'">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="painelAdmin" style="display:none; padding:1rem;">
+    <h2>Painel do Administrador</h2>
+    <button onclick="exibirFormularioNovoHino()">+ Adicionar Novo Hino</button>
+    <div id="formNovoHino" style="display:none; margin-top:1rem;">
+      <input id="novoHinario" placeholder="Hinário" /><br/>
+      <input id="novoTitulo" placeholder="Título" /><br/>
+      <textarea id="novaLetra" placeholder="Letra" rows="3"></textarea><br/>
+      <textarea id="novosAcordes" placeholder="Acordes" rows="2"></textarea><br/>
+      <button onclick="salvarNovoHino()">Salvar</button>
+    </div>
+  </div>
+
 </body>
 </html>
