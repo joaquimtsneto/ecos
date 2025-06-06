@@ -1,22 +1,10 @@
+
 {
   "name": "Ecos de Louvor",
-  "short_name": "Ecos",
-  "description": "Hinário digital com mais de 500 hinos das coleções Cantor Cristão, HCC e Cânticos.",
-  "start_url": "/index.html",
+  "short_name": "Hinário",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#F5F5DC",
-  "theme_color": "#003366",
-  "orientation": "portrait-primary",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ]
+  "background_color": "#ffffff",
+  "theme_color": "#325AD1",
+  "icons": []
 }
