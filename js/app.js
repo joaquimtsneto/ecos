@@ -1,144 +1,84 @@
 
-let hymns = [];
-let currentHymn = null;
+// Admin password logic
+const ADMIN_HASH = "abcdef0123456789abcdef0123456789:88e5312480112959a8156b9b35294a59183279c04db2f1a1b9780fb4925907ff"; // "isaias403"
+const PBKDF2_ITER = 100000;
+const PBKDF2_HASH = "SHA-256";
 
-// Load hymns data
-fetch('data/hymns-data.json')
-  .then(res => res.json())
-  .then(data => {
-    hymns = data;
-    renderHymnList(hymns);
-  });
-
-// Utility to show toast
-function showToast(message) {
-  const toast = document.createElement('div');
-  toast.className = 'toast-message';
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => {
-    toast.classList.add('fade-out');
-    setTimeout(() => {
-      document.body.removeChild(toast);
-    }, 500);
-  }, 2000);
+function hexToBuffer(hex) {
+  const bytes = new Uint8Array(hex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+  return bytes.buffer;
 }
-
-// Render list of hymns
-function renderHymnList(list) {
-  const parent = document.getElementById('hymns-list');
-  parent.innerHTML = '';
-  if (list.length === 0) {
-    parent.innerHTML = '<p>Nenhum hino encontrado.</p>';
-    return;
-  }
-  list.forEach(h => {
-    const card = document.createElement('div');
-    card.className = 'hymn-card';
-    card.innerHTML = `
-      <h2>${h.number}. ${h.title}</h2>
-      <p><em>${h.hymnal} | ${h.category}</em></p>
-      <div class="hymn-actions">
-        <button class="btn-fav">${h.isFavorite ? '❤️' : '🤍'}</button>
-        <button class="btn-share">🔗</button>
-        <button class="btn-view">Ver Letra</button>
-      </div>
-    `;
-    parent.appendChild(card);
-    const favBtn = card.querySelector('.btn-fav');
-    favBtn.addEventListener('click', () => {
-      h.isFavorite = !h.isFavorite;
-      favBtn.textContent = h.isFavorite ? '❤️' : '🤍';
-      saveHymnsData();
-    });
-    const shareBtn = card.querySelector('.btn-share');
-    shareBtn.addEventListener('click', () => {
-      const url = `${window.location.origin}${window.location.pathname}?hino=${h.number}`;
-      navigator.clipboard.writeText(url)
-        .then(() => showToast('Link copiado!'))
-        .catch(() => showToast('Erro ao copiar.'));
-    });
-    const viewBtn = card.querySelector('.btn-view');
-    viewBtn.addEventListener('click', () => {
-      showHymnModal(h);
-    });
-  });
+function bufferToHex(buffer) {
+  const bytes = new Uint8Array(buffer);
+  return Array.from(bytes).map(b => b.toString(16).padStart(2,"0")).join("");
 }
-
-// Save hymns data to localStorage
-function saveHymnsData() {
-  localStorage.setItem('hymns', JSON.stringify(hymns));
-}
-
-// Show hymn modal
-function showHymnModal(h) {
-  currentHymn = h;
-  const modal = document.getElementById('hymn-modal');
-  document.getElementById('modal-title').textContent = `${h.number}. ${h.title}`;
-  document.getElementById('modal-lyrics').textContent = h.lyrics;
-  const chordBox = document.getElementById('modal-chords');
-  if (h.chords && h.chords.trim() !== '') {
-    chordBox.textContent = h.chords;
-    document.getElementById('btn-toggle-chords').style.display = 'inline-block';
-  } else {
-    chordBox.textContent = '';
-    document.getElementById('btn-toggle-chords').style.display = 'none';
-  }
-  document.getElementById('btn-toggle-chords').onclick = () => {
-    chordBox.style.display = chordBox.style.display === 'block' ? 'none' : 'block';
-  };
-  modal.style.display = 'flex';
-}
-
-// Close hymn modal
-document.getElementById('hymn-close')?.addEventListener('click', () => {
-  document.getElementById('hymn-modal').style.display = 'none';
-});
-
-// Search functionality
-document.getElementById('search-input')?.addEventListener('input', (e) => {
-  const q = e.target.value.toLowerCase();
-  const filtered = hymns.filter(h => 
-    h.number.toString().startsWith(q) ||
-    h.title.toLowerCase().includes(q) ||
-    h.category.toLowerCase().includes(q)
+async function deriveKeyFromPassword(password, saltHex) {
+  const salt = hexToBuffer(saltHex);
+  const enc = new TextEncoder();
+  const keyMaterial = await window.crypto.subtle.importKey(
+    "raw", enc.encode(password), { name: "PBKDF2" }, false, ["deriveBits"]
   );
-  renderHymnList(filtered);
-});
+  const derivedBits = await window.crypto.subtle.deriveBits(
+    { name: "PBKDF2", salt: salt, iterations: PBKDF2_ITER, hash: PBKDF2_HASH },
+    keyMaterial, 256
+  );
+  return bufferToHex(derivedBits);
+}
 
-// Filter functionality
-document.getElementById('btn-favorites')?.addEventListener('click', () => {
-  const favs = hymns.filter(h => h.isFavorite);
-  renderHymnList(favs);
+// Toggle theme
+const btnTheme = document.getElementById("btn-toggle-theme");
+const themeIcon = btnTheme.querySelector("span");
+btnTheme.addEventListener("click", () => {
+  const isDark = document.body.classList.contains("theme-dark");
+  if (isDark) {
+    document.body.classList.replace("theme-dark","theme-light");
+    themeIcon.className = "icon-moon";
+    localStorage.setItem("theme","light");
+  } else {
+    document.body.classList.replace("theme-light","theme-dark");
+    themeIcon.className = "icon-sun";
+    localStorage.setItem("theme","dark");
+  }
 });
-document.getElementById('btn-chords')?.addEventListener('click', () => {
-  const withChords = hymns.filter(h => h.chords && h.chords.trim() !== '');
-  renderHymnList(withChords);
-});
-document.getElementById('btn-all')?.addEventListener('click', () => {
-  renderHymnList(hymns);
-});
+function applyTheme() {
+  const saved = localStorage.getItem("theme") || "light";
+  if (saved==="dark") {
+    document.body.classList.replace("theme-light","theme-dark");
+    themeIcon.className = "icon-sun";
+  }
+}
+applyTheme();
 
-// Donation modal
-document.getElementById('btn-open-donations')?.addEventListener('click', () => {
-  document.getElementById('donations-modal').style.display = 'flex';
+// Font size change
+const fontSelector = document.getElementById("font-size-selector");
+fontSelector.addEventListener("change", () => {
+  document.body.classList.remove("font-small","font-medium","font-large","font-xlarge");
+  document.body.classList.add("font-"+fontSelector.value);
+  localStorage.setItem("fontSize", fontSelector.value);
 });
-document.getElementById('donations-close')?.addEventListener('click', () => {
-  document.getElementById('donations-modal').style.display = 'none';
-});
-document.querySelectorAll('.btn-copy')?.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const txt = e.currentTarget.dataset.copy;
-    navigator.clipboard.writeText(txt)
-      .then(() => showToast('Copiado!'))
-      .catch(() => showToast('Erro'));
-  });
-});
+function applyFontSize() {
+  const size = localStorage.getItem("fontSize") || "medium";
+  document.body.classList.add("font-"+size);
+  fontSelector.value = size;
+}
+applyFontSize();
 
-// Admin modal
-document.getElementById('btn-open-admin')?.addEventListener('click', () => {
-  document.getElementById('admin-modal').style.display = 'flex';
+// Admin modal logic
+const adminModal = document.getElementById("admin-modal");
+document.getElementById("btn-open-admin").addEventListener("click", () => {
+  adminModal.classList.remove("hidden");
 });
-document.getElementById('admin-close')?.addEventListener('click', () => {
-  document.getElementById('admin-modal').style.display = 'none';
+document.getElementById("btn-admin-cancel").addEventListener("click", () => {
+  adminModal.classList.add("hidden");
+});
+document.getElementById("btn-admin-login").addEventListener("click", async () => {
+  const pwd = document.getElementById("admin-password").value;
+  const [saltHex, hashHex] = ADMIN_HASH.split(":");
+  const derived = await deriveKeyFromPassword(pwd, saltHex);
+  if (derived === hashHex) {
+    alert("Login bem-sucedido!");
+    adminModal.classList.add("hidden");
+  } else {
+    document.getElementById("login-error").classList.remove("hidden");
+  }
 });

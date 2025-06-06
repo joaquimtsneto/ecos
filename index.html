@@ -1,116 +1,66 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<style>
-/* Ajuste de largura das caixas */
-.search-container input, .hymn-card {
-  max-width: 600px;
-  margin: 0 auto;
-}
-#search-input {
-  width: 600px;
-}
-.filter-container, .action-buttons {
-  max-width: 600px;
-  margin: 10px auto;
-}
-</style>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Ecos de Louvor</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <header>
+<body class="theme-light font-medium">
+  <header class="header">
     <h1>Ecos de Louvor</h1>
     <div class="header-controls">
-      <button id="btn-theme">🌙</button>
+      <button id="btn-toggle-theme" class="icon-btn"><span class="icon-moon"></span></button>
       <select id="font-size-selector">
         <option value="small">A-</option>
         <option value="medium" selected>A</option>
         <option value="large">A+</option>
         <option value="xlarge">A++</option>
       </select>
-      <button id="btn-open-admin">🔒</button>
+      <button id="btn-open-admin" class="icon-btn"><span class="icon-lock"></span></button>
     </div>
   </header>
 
-  <div class="main-buttons">
-    <button class="button-card" id="btn-cantor-cristao">🎵 Cantor Cristão</button>
-    <button class="button-card" id="btn-hcc">🎶 HCC</button>
-    <button class="button-card" id="btn-canticos">🎤 Cânticos</button>
-    <button class="button-card" id="btn-all">📜 Mostrar Todos</button>
-  </div>
+  <main class="main-content">
+    <div class="nav-buttons">
+      <button class="nav-btn"><span class="icon-note"></span> Cantor Cristão</button>
+      <button class="nav-btn"><span class="icon-notes"></span> HCC</button>
+      <button class="nav-btn"><span class="icon-mic"></span> Cânticos</button>
+      <button class="nav-btn"><span class="icon-list"></span> Mostrar Todos</button>
+    </div>
 
-  <div class="search-container">
-    <input type="text" id="search-input" placeholder="🔍 Buscar por número, título ou categoria..." />
-    <ul id="search-suggestions" class="suggestions-list"></ul>
-  </div>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="🔍  Buscar por número, título ou categoria...">
+    </div>
 
-  <div class="filters">
-    <button id="btn-favorites">❤️ Favoritos</button>
-    <button id="btn-chords">🎼 Acordes</button>
-    <button id="btn-open-donations" style="background-color: var(--dark-yellow); color: var(--white);">💰 Doações</button>
-    <button id="btn-categories" style="background-color: var(--dark-gray); color: var(--white);">🏷️ Categorias</button>
-  </div>
+    <div class="filter-buttons">
+      <button class="filter-btn"><span class="icon-heart"></span> Favoritos</button>
+      <button class="filter-btn"><span class="icon-chords"></span> Acordes</button>
+      <button class="filter-btn btn-donation"><span class="icon-donate"></span> Doações</button>
+      <button class="filter-btn btn-category"><span class="icon-tag"></span> Categorias</button>
+    </div>
 
-  <div id="hymns-list" class="hymns-list"></div>
-
-  <!-- Hymn Modal -->
-  <div id="hymn-modal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="close-btn" id="hymn-close">&times;</button>
-      <h2 id="modal-title"></h2>
-      <div class="modal-body">
-        <pre id="modal-lyrics" style="white-space: pre-wrap; border: 1px solid var(--border-gray); padding: 1rem; border-radius: 0.25rem; background: var(--white);"></pre>
-        <pre id="modal-chords" class="chords-container"></pre>
-      </div>
-      <div class="modal-actions">
-        <button class="btn-secondary" id="btn-toggle-chords">Mostrar Cifras</button>
+    <div class="hymn-card">
+      <h2>1. <span class="hymn-title">Bendito Seja Sempre o Cordeiro</span></h2>
+      <p class="hymn-meta">Cantor Cristão | Louvor</p>
+      <div class="hymn-actions">
+        <button class="icon-btn"><span class="icon-heart-outline"></span></button>
+        <button class="btn-view"><span class="icon-link"></span> Ver Letra</button>
       </div>
     </div>
-  </div>
-
-  <!-- Donations Modal -->
-  <div id="donations-modal" class="modal-overlay">
-    <div class="modal-content">
-      <button class="close-btn" id="donations-close">&times;</button>
-      <h2>Apoie o Projeto Ecos de Louvor</h2>
-      <div class="modal-body">
-        <p>Obrigado por apoiar!</p>
-        <div class="donation-method">
-          <span>PIX (Brasil): </span><span id="pix-value">projetovoznodeserto@gmail.com</span>
-          <button class="btn-copy" data-copy="projetovoznodeserto@gmail.com">Copiar</button>
-        </div>
-        <div class="donation-method">
-          <span>MBWay (Portugal): </span><span id="mbway-value">932396829</span>
-          <button class="btn-copy" data-copy="932396829">Copiar</button>
-        </div>
-        <div class="donation-method">
-          <span>PayPal (Mundial): </span><span id="paypal-value">joao316@gmail.com</span>
-          <button class="btn-copy" data-copy="joao316@gmail.com">Copiar</button>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn-secondary" id="donations-close2">Fechar</button>
-      </div>
-    </div>
-  </div>
+  </main>
 
   <!-- Admin Modal -->
-  <div id="admin-modal" class="modal-overlay">
+  <div id="admin-modal" class="modal hidden">
     <div class="modal-content">
-      <button class="close-btn" id="admin-close">&times;</button>
       <h2>Admin Login</h2>
       <div class="modal-body">
         <label for="admin-password">Senha:</label>
-        <input type="password" id="admin-password" />
+        <input type="password" id="admin-password" placeholder="Digite a senha"/>
+        <div id="login-error" class="error-msg hidden">Senha incorreta.</div>
       </div>
       <div class="modal-actions">
-        <button class="btn-primary">Entrar</button>
-        <button class="btn-secondary">Cancelar</button>
+        <button id="btn-admin-login" class="btn-primary">Entrar</button>
+        <button id="btn-admin-cancel" class="btn-secondary">Cancelar</button>
       </div>
     </div>
   </div>
