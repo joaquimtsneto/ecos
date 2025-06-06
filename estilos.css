@@ -233,3 +233,8 @@ header .icone-topo {
   margin-left: 0.8rem;
   cursor: pointer;
 }
+
+header .icone-topo svg {
+  width: 24px;
+  height: 24px;
+}
