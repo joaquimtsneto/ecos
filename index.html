@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -7,12 +6,9 @@
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-<div style="background: #ffeb3b; color: black; text-align: center; font-size: 24px; font-weight: bold; padding: 1rem;">
-  VERSÃO 33 ATIVA
-</div>
   <header>
     <h1>Ecos de Louvor</h1>
-    
+
     <div>
       <button class="icone-topo" aria-label="Modo Noturno">
         <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1012 21a9 9 0 009-8.21z"/></svg>
@@ -27,9 +23,9 @@
         <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 17a2 2 0 01-2-2v-3a2 2 0 114 0v3a2 2 0 01-2 2zm6-2v-3a6 6 0 00-12 0v3H4v6h16v-6h-2z"/></svg>
       </button>
     </div>
-    
   </header>
 
+  <!-- Quatro botões principais dos hinários -->
   <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
     <button class="botao-hinario">
       <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M4 3h8a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1zm10 0h6a1 1 0 011 1v16a1 1 0 01-1 1h-6V3z"/></svg>
@@ -43,59 +39,10 @@
       <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 0014 0zM10 21h4v-2h-4v2z"/></svg>
       <span class="texto">Cânticos</span>
     </button>
+    <button class="botao-hinario">
+      <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+      <span class="texto">Mostrar Todos</span>
+    </button>
   </div>
-
-  <div class="busca">
-    <span>🔍</span>
-    <input type="text" placeholder="Buscar por número, título ou categoria...">
-  </div>
-
-  <div style="text-align:center;">
-    <button class="botao-funcional">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 
-      4 4 6.5 4c1.74 0 3.41 1.01 4.13 2.44C11.09 5.01 12.76 4 14.5 
-      4 17 4 19 6 19 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      Favoritos
-    </button>
-    <button class="botao-funcional">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 3v2H8v4H6V5a2 2 0 012-2h4zm0 18v-2h4v-4h2v6a2 
-      2 0 01-2 2h-4zm9-9h-2V8h-4V6h6a2 2 0 012 2v4zm-18 0h2v4h4v2H3a2 
-      2 0 01-2-2v-4z"/></svg>
-      Acordes
-    </button>
-    <button class="botao-funcional botao-doacoes">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 1C5.925 1 1 5.925 1 12s4.925 11 
-      11 11 11-4.925 11-11S18.075 1 12 1zm.75 
-      17.25h-1.5V17c0-.414.336-.75.75-.75s.75.336.75.75v1.25zm1.5-4.5c0 
-      .69-.56 1.25-1.25 1.25h-1c-.138 0-.25.112-.25.25v.25h-1.5V14c0-.69.56-1.25 
-      1.25-1.25h1c.138 0 .25-.112.25-.25v-.5c0-.138-.112-.25-.25-.25h-1c-.69 
-      0-1.25-.56-1.25-1.25V10c0-.69.56-1.25 1.25-1.25h1c.138 0 
-      .25-.112.25-.25V7.75h1.5V8c0 .69-.56 1.25-1.25 
-      1.25h-1c-.138 0-.25.112-.25.25v.5c0 .138.112.25.25.25h1c.69 
-      0 1.25.56 1.25 1.25v.5z"/></svg>
-      Doações
-    </button>
-  
-    <button class="botao-categorias">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M20.59 13.41l-8-8A2 2 0 0011.17 5H4a1 1 0 
-      00-1 1v7.17a2 2 0 00.59 1.41l8 8a2 2 0 002.83 0l6.17-6.17a2 2 0 
-      000-2.83zM7 10a2 2 0 112 2 2 2 0 01-2-2z"/></svg>
-      Categorias
-    </button>
-    
-    <div class="caixa-hino">
-      <div class="topo">
-        <div>
-          <span>CC 2</span>
-          <h3>Bendito Seja Sempre o Cordeiro</h3>
-        </div>
-        <div class="favorito">❤️</div>
-      </div>
-      <p>Bendito seja sempre o Cordeiro, morto por nós na cruz...</p>
-      <a href="#" class="ver-btn">Ver Hino</a>
-    </div>
-    </div>
 </body>
-    
-    
 </html>
