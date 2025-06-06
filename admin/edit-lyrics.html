@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Letras – Admin</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <header class="admin-header">
+    <h1>Editor de Letras</h1>
+    <button id="logoutBtn" class="btn-logout">Sair</button>
+  </header>
+
+  <main class="admin-main">
+    <label for="hymnSelect">Selecione o hino:</label>
+    <select id="hymnSelect">
+      <option value="">-- Selecione --</option>
+    </select>
+    <div id="editorContainer" style="display: none; margin-top: 20px;">
+      <textarea id="lyricsEditor" rows="15" style="width: 100%;"></textarea><br/>
+      <button id="saveLyrics">Salvar Alterações</button>
+      <button id="cancelEdit">Cancelar</button>
+      <div id="editResult" class="import-result"></div>
+    </div>
+  </main>
+
+  <script src="../script.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Admin – Ecos de Louvor</title>
+  <link rel="stylesheet" href="../estilos.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <header class="admin-header">
+    <h1>Dashboard do Administrador</h1>
+    <button id="logoutBtn" class="btn-logout">Sair</button>
+  </header>
+
+  <div id="sessionTimer" style="text-align: right; margin: 8px 20px; color: #FFD700;"></div>
+
+  <main class="admin-main">
+    <section class="admin-stats">
+      <h2>Estatísticas Rápidas</h2>
+      <ul>
+        <li>Total de Hinários: <span id="totalHymnals">—</span></li>
+        <li>Total de Hinos: <span id="totalHymns">—</span></li>
+        <li>Última Importação: <span id="lastImport">—</span></li>
+      </ul>
+    </section>
+
+    <section class="admin-actions">
+      <h2>Funções de Administração</h2>
+      <div class="action-buttons">
+        <a href="import-csv.html" class="btn-action">Importar CSV</a>
+        <a href="manage-hymns.html" class="btn-action">Gerenciar Hinos</a>
+        <a href="edit-lyrics.html" class="btn-action">Editar Letras</a>
+        <a href="change-password.html" class="btn-action">Alterar Senha</a>
+        <a href="activity-log.html" class="btn-action">Ver Log de Atividades</a>
+        <a href="manage-categories.html" class="btn-action">Gerenciar Categorias</a>
+      </div>
+    </section>
+
+    <section class="admin-import-history">
+      <h2>Histórico de Importações</h2>
+      <ul id="importHistoryList"></ul>
+    </section>
+  </main>
+
+  <script src="../script.js"></script>
+  <script src="admin.js"></script>
+  <script>
+    if (!localStorage.getItem('isAdmin')) {
+      window.location.replace('admin.html');
+      return;
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      logAdminAction('Logout', 'Admin saiu do sistema.');
+      localStorage.removeItem('isAdmin');
+      localStorage.removeItem('adminExpires');
+      window.location.replace('admin.html');
+    });
+
+    // Simula estatísticas
+    document.getElementById('totalHymnals').textContent = '3';
+    document.getElementById('totalHymns').textContent = '500+';
+    document.getElementById('lastImport').textContent = '01/06/2025';
+
+    // Session timer
+    const TIMER_INTERVAL = 1000; // 1 segundo
+    function updateSessionTimer() {
+      const expiresAt = parseInt(localStorage.getItem('adminExpires'), 10);
+      const now = Date.now();
+      if (now >= expiresAt) {
+        alert('Sua sessão expirou. Faça login novamente.');
+        logAdminAction('Session Timeout', 'Sessão expirou.');
+        localStorage.removeItem('isAdmin');
+        localStorage.removeItem('adminExpires');
+        window.location.replace('admin.html');
+        return;
+      }
+      const diff = expiresAt - now;
+      const mins = Math.floor(diff / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+      document.getElementById('sessionTimer').textContent =
+        `Tempo restante: ${mins}m ${secs}s`;
+      if (diff <= 60000 && diff > 0) {
+        document.getElementById('sessionTimer').style.color = '#FF0000';
+      }
+    }
+    setInterval(updateSessionTimer, TIMER_INTERVAL);
+    updateSessionTimer();
+
+    // Extend session on admin action
+    function extendSession() {
+      const expiresAt = Date.now() + 30 * 60 * 1000;
+      localStorage.setItem('adminExpires', expiresAt);
+      logAdminAction('Extender Sessão', 'Sessão estendida por inatividade.');
+    }
+    document.querySelectorAll('.btn-action, .btn-logout').forEach(btn => {
+      btn.addEventListener('click', extendSession);
+    });
+
+    // Import history
+    const importHistory = JSON.parse(localStorage.getItem('importHistory')) || [];
+    const historyList = document.getElementById('importHistoryList');
+    if (importHistory.length === 0) {
+      historyList.innerHTML = '<li>Nenhuma importação realizada ainda.</li>';
+    } else {
+      importHistory.slice().reverse().forEach(item => {
+        const li = document.createElement('li');
+        const date = new Date(item.date).toLocaleString();
+        li.textContent = `${date} — ${item.imported}/${item.totalLines} importados, ${item.errors} erros`;
+        historyList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
