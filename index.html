@@ -92,7 +92,40 @@
       <a href="#" class="ver-btn">Ver Hino</a>
     </div>
     </div>
+
+<div id="painelAdmin" style="display: none; position: fixed; top: 5%; left: 50%; transform: translateX(-50%);
+  background: white; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); padding: 2rem; max-width: 640px; z-index: 999;">
+  <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Painel Administrativo</h2>
+  <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+    <div style="flex: 1; background-color: #e3f2fd; padding: 1rem; border-radius: 8px; text-align: center;">
+      <div style="font-size: 0.9rem;">Total de Hinos</div>
+      <div style="font-size: 1.5rem; font-weight: bold;">500+</div>
+    </div>
+    <div style="flex: 1; background-color: #e8f5e9; padding: 1rem; border-radius: 8px; text-align: center;">
+      <div style="font-size: 0.9rem;">Categorias</div>
+      <div style="font-size: 1.5rem; font-weight: bold;">30</div>
+    </div>
+    <div style="flex: 1; background-color: #fffde7; padding: 1rem; border-radius: 8px; text-align: center;">
+      <div style="font-size: 0.9rem;">Sessão</div>
+      <div style="font-size: 1.1rem;">Tempo restante: 28:35</div>
+    </div>
+  </div>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+    <button style="flex: 1 1 48%; background-color: #0d47a1; color: white; padding: 0.8rem; border: none; border-radius: 8px; font-weight: 500;">📥 Importar CSV</button>
+    <button style="flex: 1 1 48%; background-color: #2e7d32; color: white; padding: 0.8rem; border: none; border-radius: 8px; font-weight: 500;">📝 Gerenciar Hinos</button>
+    <button style="flex: 1 1 48%; background-color: #616161; color: white; padding: 0.8rem; border: none; border-radius: 8px; font-weight: 500;">⚙️ Configurações</button>
+    <button onclick="document.getElementById('painelAdmin').style.display='none'" style="flex: 1 1 48%; background-color: #b71c1c; color: white; padding: 0.8rem; border: none; border-radius: 8px; font-weight: 500;">⬅️ Sair</button>
+  </div>
+  <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ccc; font-size: 0.9rem;">
+    <strong>Atividade Recente</strong>
+    <ul style="margin: 0.5rem 0 0 1rem;">
+      <li>Última edição: Hino 123 - 10/05/2023</li>
+      <li>Último login: 12/05/2023 15:30</li>
+    </ul>
+  </div>
+</div>
 </body>
+
     
     
 </html>
