@@ -1,97 +1,105 @@
+
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ecos de Louvor</title>
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header>
     <h1>Ecos de Louvor</h1>
-    <div>
-      <button class="icone-topo" aria-label="Modo Noturno">
-        <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1012 21a9 9 0 009-8.21z"/></svg>
-      </button>
-      <button class="icone-topo" aria-label="Ajustar Texto">
-        <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
-          <text x="1" y="17" font-size="14" font-family="Helvetica, sans-serif">A</text>
-          <text x="10" y="17" font-size="10" font-family="Helvetica, sans-serif">a</text>
-        </svg>
-      </button>
-      <button class="icone-topo" aria-label="Administrador">
-        <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 17a2 2 0 01-2-2v-3a2 2 0 114 0v3a2 2 0 01-2 2zm6-2v-3a6 6 0 00-12 0v3H4v6h16v-6h-2z"/></svg>
-      </button>
+    <div class="header-controls">
+      <button id="btn-theme">🌙</button>
+      <select id="font-size-selector">
+        <option value="small">A-</option>
+        <option value="medium" selected>A</option>
+        <option value="large">A+</option>
+        <option value="xlarge">A++</option>
+      </select>
+      <button id="btn-open-admin">🔒</button>
     </div>
   </header>
 
-  <div class="hinario-container">
-    <button class="botao-hinario">
-      <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M4 3h8a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1zm10 0h6a1 1 0 011 1v16a1 1 0 01-1 1h-6V3z"/></svg>
-      <span class="texto">Cantor Cristão</span>
-    </button>
-    <button class="botao-hinario">
-      <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M9 3v12.26A4 4 0 108 17V7h10V3H9z"/></svg>
-      <span class="texto">HCC</span>
-    </button>
-    <button class="botao-hinario">
-      <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 0014 0zM10 21h4v-2h-4v2z"/></svg>
-      <span class="texto">Cânticos</span>
-    </button>
-    <button class="botao-hinario">
-      <svg width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"/></svg>
-      <span class="texto">Mostrar Todos</span>
-    </button>
+  <div class="main-buttons">
+    <button class="button-card" id="btn-cantor-cristao">🎵 Cantor Cristão</button>
+    <button class="button-card" id="btn-hcc">🎶 HCC</button>
+    <button class="button-card" id="btn-canticos">🎤 Cânticos</button>
+    <button class="button-card" id="btn-all">📜 Mostrar Todos</button>
   </div>
 
-  <div class="busca">
-    <span>🔍</span>
-    <input type="text" placeholder="Buscar por número, título ou categoria...">
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="🔍 Buscar por número, título ou categoria..." />
+    <ul id="search-suggestions" class="suggestions-list"></ul>
   </div>
 
-  <div style="text-align:center;">
-    <button class="botao-funcional">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 
-      4 4 6.5 4c1.74 0 3.41 1.01 4.13 2.44C11.09 5.01 12.76 4 14.5 
-      4 17 4 19 6 19 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      Favoritos
-    </button>
-    <button class="botao-funcional">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 3v2H8v4H6V5a2 2 0 012-2h4zm0 18v-2h4v-4h2v6a2 
-      2 0 01-2 2h-4zm9-9h-2V8h-4V6h6a2 2 0 012 2v4zm-18 0h2v4h4v2H3a2 
-      2 0 01-2-2v-4z"/></svg>
-      Acordes
-    </button>
-    <button class="botao-funcional botao-doacoes">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M12 1C5.925 1 1 5.925 1 12s4.925 11 
-      11 11 11-4.925 11-11S18.075 1 12 1zm.75 
-      17.25h-1.5V17c0-.414.336-.75.75-.75s.75.336.75.75v1.25zm1.5-4.5c0 
-      .69-.56 1.25-1.25 1.25h-1c-.138 0-.25.112-.25.25v.25h-1.5V14c0-.69.56-1.25 
-      1.25-1.25h1c.138 0 .25-.112.25-.25v-.5c0-.138-.112-.25-.25-.25h-1c-.69 
-      0-1.25-.56-1.25-1.25V10c0-.69.56-1.25 1.25-1.25h1c.138 0 
-      .25-.112.25-.25V7.75h1.5V8c0 .69-.56 1.25-1.25 
-      1.25h-1c-.138 0-.25.112-.25.25v.5c0 .138.112.25.25.25h1c.69 
-      0 1.25.56 1.25 1.25v.5z"/></svg>
-      Doações
-    </button>
+  <div class="filters">
+    <button id="btn-favorites">❤️ Favoritos</button>
+    <button id="btn-chords">🎼 Acordes</button>
+    <button id="btn-open-donations" style="background-color: var(--dark-yellow); color: var(--white);">💰 Doações</button>
+    <button id="btn-categories" style="background-color: var(--dark-gray); color: var(--white);">🏷️ Categorias</button>
+  </div>
 
-    <button class="botao-categorias">
-      <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M20.59 13.41l-8-8A2 2 0 0011.17 5H4a1 1 0 
-      00-1 1v7.17a2 2 0 00.59 1.41l8 8a2 2 0 002.83 0l6.17-6.17a2 2 0 
-      000-2.83zM7 10a2 2 0 112 2 2 2 0 01-2-2z"/></svg>
-      Categorias
-    </button>
+  <div id="hymns-list" class="hymns-list"></div>
 
-    <div class="caixa-hino">
-      <div class="topo">
-        <div>
-          <span>CC 2</span>
-          <h3>Bendito Seja Sempre o Cordeiro</h3>
-        </div>
-        <div class="favorito">❤️</div>
+  <!-- Hymn Modal -->
+  <div id="hymn-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" id="hymn-close">&times;</button>
+      <h2 id="modal-title"></h2>
+      <div class="modal-body">
+        <pre id="modal-lyrics" style="white-space: pre-wrap; border: 1px solid var(--border-gray); padding: 1rem; border-radius: 0.25rem; background: var(--white);"></pre>
+        <pre id="modal-chords" class="chords-container"></pre>
       </div>
-      <p>Bendito seja sempre o Cordeiro, morto por nós na cruz...</p>
-      <a href="#" class="ver-btn">Ver Hino</a>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-toggle-chords">Mostrar Cifras</button>
+      </div>
     </div>
   </div>
+
+  <!-- Donations Modal -->
+  <div id="donations-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" id="donations-close">&times;</button>
+      <h2>Apoie o Projeto Ecos de Louvor</h2>
+      <div class="modal-body">
+        <p>Obrigado por apoiar!</p>
+        <div class="donation-method">
+          <span>PIX (Brasil): </span><span id="pix-value">projetovoznodeserto@gmail.com</span>
+          <button class="btn-copy" data-copy="projetovoznodeserto@gmail.com">Copiar</button>
+        </div>
+        <div class="donation-method">
+          <span>MBWay (Portugal): </span><span id="mbway-value">932396829</span>
+          <button class="btn-copy" data-copy="932396829">Copiar</button>
+        </div>
+        <div class="donation-method">
+          <span>PayPal (Mundial): </span><span id="paypal-value">joao316@gmail.com</span>
+          <button class="btn-copy" data-copy="joao316@gmail.com">Copiar</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="donations-close2">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Modal -->
+  <div id="admin-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" id="admin-close">&times;</button>
+      <h2>Admin Login</h2>
+      <div class="modal-body">
+        <label for="admin-password">Senha:</label>
+        <input type="password" id="admin-password" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn-primary">Entrar</button>
+        <button class="btn-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
