@@ -60,33 +60,6 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Ecos de Louvor</h1>
-    <div class="icon-group">
-      <i class="fas fa-moon"></i>
-      <i class="fas fa-text-height"></i>
-      <i class="fas fa-lock" onclick="document.getElementById('adminLogin').style.display='flex'"></i>
-    </div>
-  </header>
-
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Buscar por título, número ou categoria..." oninput="filtrarHinos()" />
-  </div>
-
-  <div id="listaHinos" class="hymn-list"></div>
-
-  <div id="adminLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#00000080; align-items:center; justify-content:center;">
-    <div style="background:white; padding:2rem; border-radius:10px; max-width:400px; margin:auto;">
-      <h3>🔐 Acesso Administrativo</h3>
-      <input type="password" id="senhaAdmin" placeholder="Digite a senha..." style="padding:0.5rem; width:100%; margin:1rem 0;" />
-      <div style="text-align:right;">
-        <button onclick="verificarSenha()">Entrar</button>
-        <button onclick="document.getElementById('adminLogin').style.display='none'">Cancelar</button>
-      </div>
-    </div>
-  </div>
-
-  
 <div id="painelAdmin" style="display:none; padding:1rem;">
   <h2 style="font-weight:700; font-size:1.5rem; margin-bottom:1rem;">Painel Administrativo</h2>
   <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
@@ -133,6 +106,33 @@
   </div>
 </div>
 
+  <header>
+    <h1>Ecos de Louvor</h1>
+    <div class="icon-group">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-text-height"></i>
+      <i class="fas fa-lock" onclick="document.getElementById('adminLogin').style.display='flex'"></i>
+    </div>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Buscar por título, número ou categoria..." oninput="filtrarHinos()" />
+  </div>
+
+  <div id="listaHinos" class="hymn-list"></div>
+
+  <div id="adminLogin" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#00000080; align-items:center; justify-content:center;">
+    <div style="background:white; padding:2rem; border-radius:10px; max-width:400px; margin:auto;">
+      <h3>🔐 Acesso Administrativo</h3>
+      <input type="password" id="senhaAdmin" placeholder="Digite a senha..." style="padding:0.5rem; width:100%; margin:1rem 0;" />
+      <div style="text-align:right;">
+        <button onclick="verificarSenha()">Entrar</button>
+        <button onclick="document.getElementById('adminLogin').style.display='none'">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  
     <h2>Painel do Administrador</h2>
     <button onclick="exibirFormularioNovoHino()">+ Adicionar Novo Hino</button>
     <div id="formNovoHino" style="display:none; margin-top:1rem;">
@@ -332,52 +332,6 @@ renderizarHinos();
   </div>
 
   
-<div id="painelAdmin" style="display:none; padding:1rem;">
-  <h2 style="font-weight:700; font-size:1.5rem; margin-bottom:1rem;">Painel Administrativo</h2>
-  <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
-    <div style="flex:1; min-width:200px; background:#e0edff; padding:1rem; border-radius:10px;">
-      <strong>Total de Hinos</strong><br/><span style="font-size:1.4rem;">500+</span>
-    </div>
-    <div style="flex:1; min-width:200px; background:#e6f7eb; padding:1rem; border-radius:10px;">
-      <strong>Categorias</strong><br/><span style="font-size:1.4rem;">30</span>
-    </div>
-    <div style="flex:1; min-width:200px; background:#fff5d1; padding:1rem; border-radius:10px;">
-      <strong>Sessão</strong><br/><span id="contadorSessao" style="font-size:1.4rem;">30:00</span>
-    </div>
-  </div>
-
-  <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
-    <button style="flex:1; min-width:200px; background:#3b82f6; color:white; padding:1rem; border:none; border-radius:10px; font-weight:bold;">
-      ⬆️ Importar CSV
-    </button>
-    <button onclick="exibirFormularioNovoHino()" style="flex:1; min-width:200px; background:#22c55e; color:white; padding:1rem; border:none; border-radius:10px; font-weight:bold;">
-      ✏️ Gerenciar Hinos
-    </button>
-    <button style="flex:1; min-width:200px; background:#a855f7; color:white; padding:1rem; border:none; border-radius:10px; font-weight:bold;">
-      ⚙️ Configurações
-    </button>
-    <button onclick="logoutAdmin()" style="flex:1; min-width:200px; background:#ef4444; color:white; padding:1rem; border:none; border-radius:10px; font-weight:bold;">
-      🔴 Sair
-    </button>
-  </div>
-
-  <div id="formNovoHino" style="display:none; margin-top:1rem;">
-    <input id="novoHinario" placeholder="Hinário" /><br/>
-    <input id="novoTitulo" placeholder="Título" /><br/>
-    <textarea id="novaLetra" placeholder="Letra" rows="3"></textarea><br/>
-    <textarea id="novosAcordes" placeholder="Acordes" rows="2"></textarea><br/>
-    <button onclick="salvarNovoHino()">Salvar</button>
-  </div>
-
-  <div style="background:#f3f4f6; padding:1rem; border-radius:10px; margin-top:2rem;">
-    <strong>Atividade Recente</strong>
-    <ul style="margin:0.5rem 0 0 1rem;">
-      <li>Última edição: Hino 123 - 10/05/2023</li>
-      <li>Último login: 12/05/2023 15:30</li>
-    </ul>
-  </div>
-</div>
-
     <h2>Painel do Administrador</h2>
     <button onclick="exibirFormularioNovoHino()">+ Adicionar Novo Hino</button>
     <div id="formNovoHino" style="display:none; margin-top:1rem;">
