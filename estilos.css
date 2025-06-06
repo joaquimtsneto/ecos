@@ -223,3 +223,13 @@ header .icone-topo {
   font-size: 0.9rem;
   font-weight: 500;
 }
+
+header .icone-topo {
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-size: 1.2rem;
+  color: white;
+  margin-left: 0.8rem;
+  cursor: pointer;
+}
