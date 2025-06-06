@@ -196,3 +196,47 @@ body {
   font-size: 0.9rem;
   margin-top: 5px;
 }
+
+
+/* ICONS COLOR WHITE */
+.icon-btn span,
+.nav-btn span,
+.filter-btn span,
+.btn-view span,
+.btn-donation span,
+.btn-category span {
+  color: var(--white);
+}
+
+/* NAV BUTTONS SIZE */
+.nav-btn {
+  padding: 15px 30px; /* increased size */
+}
+
+/* FILTER BUTTONS SIZE AND SPACING */
+.filter-buttons {
+  gap: 40px; /* increased gap */
+}
+.filter-btn {
+  padding: 12px 20px; /* increased size */
+}
+
+/* HEADER ICON BUTTONS */
+.header-controls .icon-btn span {
+  color: var(--white);
+  font-size: 1.2rem;
+}
+
+/* SEARCH AND CARD WIDTH ADJUSTMENTS */
+.search-container input {
+  width: 580px;
+  max-width: 90%;
+}
+.hymn-card {
+  max-width: 580px;
+}
+
+/* FONT THIN */
+body {
+  font-weight: var(--font-thin);
+}
