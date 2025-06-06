@@ -108,59 +108,29 @@ h1 {
   background-color: #e3f2fd;
 }
 
-.caixa-hino {
-  background-color: white;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: box-shadow 0.3s ease;
-  margin: 1rem auto;
-  max-width: 600px;
-}
-
-.caixa-hino:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.caixa-hino .topo {
+/* Reduzir altura do topo */
+header {
+  background-color: #325AD1;
+  color: white;
+  padding: 0.6rem 1.2rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.5rem;
 }
 
-.caixa-hino .topo span {
-  font-size: 0.85rem;
-  color: #555;
-}
-
-.caixa-hino h3 {
-  margin: 0.2rem 0;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #000;
-}
-
-.caixa-hino .favorito {
-  color: red;
+/* Remover caixas dos ícones superiores */
+header .icone-topo {
+  background: none;
+  border: none;
+  box-shadow: none;
   font-size: 1.2rem;
+  color: white;
+  margin-left: 0.8rem;
+  cursor: pointer;
 }
 
-.caixa-hino p {
-  font-size: 0.95rem;
-  color: #222;
-  margin-top: 0.5rem;
-}
-
-.caixa-hino .ver-btn {
-  display: inline-block;
-  margin-top: 1rem;
-  background-color: #e3f2fd;
-  color: #1976d2;
-  padding: 0.4rem 0.9rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  float: right;
+/* Aumentar largura dos botões principais */
+.botao-hinario {
+  width: 240px;
+  height: 100px;
 }
