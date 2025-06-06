@@ -164,3 +164,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INICIALIZAÇÃO ---
     renderHymnList(allHymns);
 });
+
+/* Atualizado v11b */
